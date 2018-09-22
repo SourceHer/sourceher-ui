@@ -8,6 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import ReposList from 'components/ReposList';
+import Landing from './../../images/landing.jpg';
 import './style.scss';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -35,7 +36,8 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
           <meta name="description" content="SourceHer homepage" />
         </Helmet>
         <div className="home-page">
-          <section className="centered">
+          <section>
+            <img src={Landing} alt="Landing page banner" />
           </section>
         </div>
       </article>
