@@ -51,7 +51,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
               <Grid item xs={6}>
                 <img src={Landing} alt="Landing page banner" />
               </Grid>
-              <Grid item xs>
+              <Grid item xs={6}>
                 <Grid
                   container
                   className="paper"
@@ -62,7 +62,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                         Source<strong>Her.</strong>
                       </Typography>
 
-                      <Typography variant="display4">
+                      <Typography variant="display1">
                         BE APART OF A GROWING INDUSTRY AND JOIN MORE WOMEN IN TECH.
                       </Typography>
 
