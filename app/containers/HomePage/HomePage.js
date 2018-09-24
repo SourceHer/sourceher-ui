@@ -7,7 +7,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import ReposList from 'components/ReposList';
 import Landing from './../../images/landing.jpg';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -18,24 +17,27 @@ import Button from '@material-ui/core/Button';
 import './style.scss';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  /**
-   * when initial state username is not null, submit the form to load repos
-   */
-  componentDidMount() {
-    if (this.props.username && this.props.username.trim().length > 0) {
-      this.props.onSubmitForm();
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      login: false
     }
+
+    this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  /**
+   * Changes to login view from signup
+   * 
+   */
+  handleLogin() {
+    this.setState({
+      login: true
+    });
   }
 
   render() {
-    const { loading, error, repos } = this.props;
-    const bull = <span className="bullet">•</span>;
-    const reposListProps = {
-      loading,
-      error,
-      repos,
-    };
-
     return (
       <article>
         <Helmet>
@@ -93,7 +95,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                             />
                           </Grid>
 
-                          <Grid item xs={6}>
+                          <Grid item xs={this.state.login ? 12 : 6}>
                             <TextField
                               id="password"
                               name="password"
@@ -104,7 +106,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                             />
                           </Grid>
 
-                          <Grid item xs={6}>
+                          <Grid item xs={6} className={this.state.login ? "hide" : "show"}>
                             <TextField
                               id="confirmpassword"
                               name="confirmpassword"
@@ -115,15 +117,23 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                             />
                           </Grid>
 
-                          <Grid item xs={4}>
+                          <Grid item xs={4} className={this.state.login ? "hide" : "show"}>
                             <Button variant="contained" color="primary" spacing={8}>
                               Signup
                             </Button>
                           </Grid>
 
-                          <Grid item xs={8}>
-                            <Typography component="p" variant="subheading" className="login-link">
-                              Already have an account ? <a>Login Here</a>
+                          <Grid item xs={12} className={this.state.login ? "show" : "hide"}>
+                            <div style={{textAlign: 'center'}}>
+                                <Button variant="contained" color="primary" spacing={8}>
+                                  Login
+                                </Button>
+                            </div>
+                          </Grid>
+
+                          <Grid item xs={8} className={this.state.login ? "hide" : "show"}>
+                            <Typography component="p" variant="subheading">
+                              Already have an account ? <a href="#" onClick={this.handleLogin}>Login Here</a>
                             </Typography>
                           </Grid>
                         </Grid>
@@ -146,11 +156,5 @@ HomePage.propTypes = {
     PropTypes.object,
     PropTypes.bool,
   ]),
-  repos: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.bool,
-  ]),
-  onSubmitForm: PropTypes.func,
-  username: PropTypes.string,
-  onChangeUsername: PropTypes.func,
+  onSubmitForm: PropTypes.func
 };
