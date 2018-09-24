@@ -25,6 +25,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
     }
 
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleSignup = this.handleSignup.bind(this);
   }
 
   /**
@@ -35,6 +36,13 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
     this.setState({
       login: true
     });
+  }
+
+  /**
+   * Signup with details
+   */
+  handleSignup() {
+    
   }
 
   render() {
@@ -118,12 +126,12 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                           </Grid>
 
                           <Grid item xs={4} className={this.state.login ? "hide" : "show"}>
-                            <Button variant="contained" color="primary" spacing={8}>
+                            <Button variant="contained" color="primary" spacing={8} onClick={this.handleSignup}>
                               Signup
                             </Button>
                           </Grid>
 
-                          <Grid item xs={12} className={this.state.login ? "show" : "hide"}>
+                          <Grid item xs={6} className={this.state.login ? "show" : "hide"}>
                             <div style={{textAlign: 'center'}}>
                                 <Button variant="contained" color="primary" spacing={8}>
                                   Login
@@ -134,6 +142,12 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                           <Grid item xs={8} className={this.state.login ? "hide" : "show"}>
                             <Typography component="p" variant="subheading">
                               Already have an account ? <a href="#" onClick={this.handleLogin}>Login Here</a>
+                            </Typography>
+                          </Grid>
+
+                          <Grid item xs={6} className={this.state.login ? "show" : "hide"}>
+                            <Typography component="p" variant="subheading">
+                              <a href="#">Forgot Password ?</a>
                             </Typography>
                           </Grid>
                         </Grid>
